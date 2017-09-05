@@ -18,10 +18,10 @@ const db = require('./database');
 module.exports = function () {
 
     var config = null;
-    switch (process.env.LIKE_ENV)
+    switch (process.env.NODE_ENV)
     {
         case "dev": config = require('./env/dev'); break;
-        case "prod": config = require('./env/prod'); break;
+        case "test": config = require('./env/test'); break;
         default: config = require('./env/dev');
     }
 
