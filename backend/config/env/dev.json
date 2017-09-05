@@ -1,0 +1,16 @@
+{
+  "appPort": 3000,
+  "dbName": "videoLikeDb",
+  "dbPort": 27017,
+  "dbUser": "",
+  "dbPass": "",
+  "dbHost": "localhost",
+  "urls":{
+    "videos":{
+      "getAll":"/api/videos",
+      "getById": "/api/videos/:id",
+      "likeVideo": "/api/videos/:id"
+    }
+  }
+
+}

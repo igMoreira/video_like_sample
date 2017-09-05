@@ -1,0 +1,17 @@
+{
+  "name": "video_like_sample",
+  "version": "1.0.0",
+  "description": "This project is a sample offering a video like feature",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Iago Moreira da Silva",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "consign": "^0.1.6",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.10"
+  }
+}
