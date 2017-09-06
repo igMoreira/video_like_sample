@@ -28,13 +28,12 @@ class VideoGallery extends Component{
             this.request.abort();
             this.request = null;
         }
-
     }
 
     handleLike(video)
     {
         if((!this.lastLike) || (this.secondsAgo(this.lastLike) > 10)) {
-            fetch('http://localhost:3030/api/videos/' + video._id, {method: "POST"})
+            fetch(this.likeUrl + video._id, {method: "POST"})
                 .then(response => {
                         if (!response.ok) {
                             console.error("Error trying to like video");
@@ -47,7 +46,7 @@ class VideoGallery extends Component{
                 );
         }
         else
-            alert("YOU CANNOT LIKE BEFORE 10s. Current elpased time : " + this.secondsAgo(this.lastLike));
+            alert("YOU CANNOT LIKE BEFORE 10s. Current elapsed time : " + this.secondsAgo(this.lastLike));
     }
 
     secondsAgo(likeTime) {
@@ -56,13 +55,16 @@ class VideoGallery extends Component{
 
     fetchVideos()
     {
-        fetch(`http://localhost:3030/api/videos`)
+        fetch(this.getAllVideosUrl)
             .then(result => result.json())
             .then(videos => this.setState({videos}));
     }
 
     render()
     {
+        this.getAllVideosUrl = this.props.getAllVideos;
+        this.likeUrl = this.props.likeUrl;
+        
         return (
             <div id="videoGallery">
                 <Grid>
