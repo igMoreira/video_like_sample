@@ -33,14 +33,25 @@ class VideoGallery extends Component{
 
     handleLike(video)
     {
-        fetch('http://localhost:3030/api/videos/'+video._id, {method:"POST"})
-            .then(response => {
-                    if (!response.ok) {
-                        console.error("Error trying to like video");
-                        console.error(response);
+        if((!this.lastLike) || (this.secondsAgo(this.lastLike) > 10)) {
+            fetch('http://localhost:3030/api/videos/' + video._id, {method: "POST"})
+                .then(response => {
+                        if (!response.ok) {
+                            console.error("Error trying to like video");
+                            console.error(response);
+                        }
+                        else {
+                            this.lastLike = Math.floor(Date.now() / 1000);
+                        }
                     }
-                }
-            );
+                );
+        }
+        else
+            alert("YOU CANNOT LIKE BEFORE 10s. Current elpased time : " + this.secondsAgo(this.lastLike));
+    }
+
+    secondsAgo(likeTime) {
+        return Math.round((new Date().getTime() / 1000)) - likeTime;
     }
 
     fetchVideos()
