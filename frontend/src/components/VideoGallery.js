@@ -69,7 +69,7 @@ class VideoGallery extends Component{
                                 <Row>
                                     <Col xs={6} md={3} />
                                     <Col xs={12} md={6}>
-                                        <ReactPlayer width={600} height={360} url="https://youtu.be/4gvmyfA7Z5M"/>
+                                        <ReactPlayer width={600} height={360} url={video.url}/>
                                         <Button bsStyle="primary" bsSize="large" onClick={()=>{this.handleLike(video)}}>Like me</Button>
                                     </Col>
                                     <Col xs={6} md={3} />
