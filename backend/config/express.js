@@ -6,6 +6,8 @@
 
 const express = require('express');
 const app = express();
+const expressLogging = require('express-logging');
+const logger = require('logops');
 
 const bodyParser = require('body-parser');
 const load = require('consign');
@@ -31,6 +33,7 @@ module.exports = function () {
 
     app.use(bodyParser.urlencoded({extended:true}));
     app.use(bodyParser.json());
+    app.use(expressLogging(logger));
 
     mongoose.connect(db(app.config).getDbConnectionString());
 
