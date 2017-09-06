@@ -11,6 +11,7 @@ const logger = require('logops');
 
 const bodyParser = require('body-parser');
 const load = require('consign');
+const cors = require('cors');
 
 const mongoose = require('mongoose');
 const db = require('./database');
@@ -34,6 +35,7 @@ module.exports = function () {
     app.use(bodyParser.urlencoded({extended:true}));
     app.use(bodyParser.json());
     app.use(expressLogging(logger));
+    app.use(cors());
 
     mongoose.connect(db(app.config).getDbConnectionString());
 

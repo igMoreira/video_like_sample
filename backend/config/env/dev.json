@@ -1,5 +1,5 @@
 {
-  "appPort": 3000,
+  "appPort": 3030,
   "dbName": "videoLikeDb",
   "dbPort": 27017,
   "dbUser": "",
