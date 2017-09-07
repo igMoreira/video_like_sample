@@ -9,7 +9,7 @@ class VideoGallery extends Component{
 
     constructor() {
         super();
-        this.state = { videos: [] };
+        this.state = { videos: [], likeAllowed: true };
     }
 
     componentDidMount() {
@@ -44,9 +44,11 @@ class VideoGallery extends Component{
                         }
                     }
                 );
+            this.state.likeAllowed = true;
         }
-        else
-            alert("YOU CANNOT LIKE BEFORE 10s. Current elapsed time : " + this.secondsAgo(this.lastLike));
+        else {
+            this.state.likeAllowed = false;
+        }
     }
 
     secondsAgo(likeTime) {
@@ -64,7 +66,15 @@ class VideoGallery extends Component{
     {
         this.getAllVideosUrl = this.props.getAllVideos;
         this.likeUrl = this.props.likeUrl;
-        
+        var alertMessage = (this.state.likeAllowed) ? null :
+            <Row>
+                <Col xs={6} md={3} />
+                <Col xs={12} md={6}>
+                    <div className="alert alert-danger">You cannot do more than one like within 10s!</div>
+                </Col>
+                <Col xs={6} md={3} />
+            </Row> ;
+
         return (
             <div id="videoGallery">
                 <Grid>
@@ -78,15 +88,24 @@ class VideoGallery extends Component{
                                     </Col>
                                     <Col xs={6} md={3} />
                                 </Row>
-
+                                <br/>
                                 <Row>
                                     <Col xs={6} md={3} />
                                     <Col xs={12} md={6}>
                                         <ReactPlayer width={600} height={360} url={video.url}/>
+                                    </Col>
+                                    <Col xs={6} md={3} />
+                                </Row>
+                                <br/>
+                                <Row>
+                                    <Col xs={6} md={3} />
+                                    <Col xs={12} md={6}>
                                         <Button bsStyle="primary" bsSize="large" onClick={()=>{this.handleLike(video)}}>Like me</Button>
                                     </Col>
                                     <Col xs={6} md={3} />
                                 </Row>
+                                <br/>
+                                {alertMessage}
                             </div>
                         )
                     }
