@@ -13,8 +13,15 @@ class VideoGallery extends Component{
     }
 
     componentDidMount() {
-        this.fetchVideos();
-        this.intervalId = setInterval(this.fetchVideos.bind(this), 1000);
+        var {getAllVideosUrl, likeUrl, fetchVideos, sendLike} = this.props;
+
+        this.getAllVideosUrl = getAllVideosUrl;
+        this.likeUrl = likeUrl;
+        this.fetchVideos = fetchVideos;
+        this.sendLike = sendLike;
+
+        this.getVideos();
+        this.intervalId = setInterval(this.getVideos.bind(this), 1000);
     }
 
     componentWillMount()
@@ -33,7 +40,7 @@ class VideoGallery extends Component{
     handleLike(video)
     {
         if((!this.lastLike) || (this.secondsAgo(this.lastLike) > 10)) {
-            fetch(this.likeUrl + video._id, {method: "POST"})
+            this.sendLike(this.likeUrl, video)
                 .then(response => {
                         if (!response.ok) {
                             console.error("Error trying to like video");
@@ -55,17 +62,15 @@ class VideoGallery extends Component{
         return Math.round((new Date().getTime() / 1000)) - likeTime;
     }
 
-    fetchVideos()
+    getVideos()
     {
-        fetch(this.getAllVideosUrl)
-            .then(result => result.json())
+        this.fetchVideos(this.getAllVideosUrl)
             .then(videos => this.setState({videos}));
     }
 
+
     render()
     {
-        this.getAllVideosUrl = this.props.getAllVideos;
-        this.likeUrl = this.props.likeUrl;
         var alertMessage = (this.state.likeAllowed) ? null :
             <Row>
                 <Col xs={6} md={3} />
