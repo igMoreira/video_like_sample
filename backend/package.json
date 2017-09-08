@@ -4,7 +4,8 @@
   "description": "This project is a sample offering a video like feature",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha"
+    "test": "node node_modules/mocha/bin/mocha",
+    "start": "node index.js"
   },
   "author": "Iago Moreira da Silva",
   "license": "ISC",
