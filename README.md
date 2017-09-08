@@ -42,6 +42,7 @@ libraries and dependencies you must have prior to execution, they are:
 
 - Frontend: <br/>
     1. cd frontend folder
+    2. npm install (if not executed before)
     2. npm start
     3. The application will be served in localhost port 3000, by default a browser window will be started
 
